@@ -4,8 +4,9 @@
   "author": "James Pepplinkhouse",
   "license": "MIT",
   "scripts": {
-    "start": "docker-compose up -d && ts-node src/index.ts",
-    "stop": "docker-compose down"
+    "start": "ts-node src/index.ts",
+    "up": "docker-compose up -d",
+    "down": "docker-compose down"
   },
   "prettier": {
     "semi": false,

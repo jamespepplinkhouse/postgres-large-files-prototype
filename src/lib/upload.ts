@@ -1,7 +1,7 @@
 import { db, createLargeObjectManager } from './db'
 import stream = require('stream')
 
-export const saveFile = async (incomingStream: stream) => {
+export default async (incomingStream: stream) => {
   const result = await db.tx(async (tx: any) => {
     const man = createLargeObjectManager(tx)
     return man
@@ -17,5 +17,3 @@ export const saveFile = async (incomingStream: stream) => {
   })
   return result
 }
-
-export default saveFile

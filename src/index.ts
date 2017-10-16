@@ -3,4 +3,6 @@
 // Upload files with the wrong byte length
 // Upload files where we kill the stream randomly
 
-console.log('Hello world!')
+import uploader from './uploader'
+
+uploader()
