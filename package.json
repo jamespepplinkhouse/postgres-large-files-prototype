@@ -1,0 +1,25 @@
+{
+  "name": "postgres-large-files-prototype",
+  "version": "0.0.1",
+  "author": "James Pepplinkhouse",
+  "license": "MIT",
+  "scripts": {
+    "start": "docker-compose up -d && ts-node src/index.ts",
+    "stop": "docker-compose down"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "pg-large-object": "2.0.0",
+    "pg-promise": "7.0.2",
+    "ts-node": "3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "8.0.34",
+    "prettier": "1.7.4",
+    "tslint": "5.7.0",
+    "typescript": "2.5.3"
+  }
+}
