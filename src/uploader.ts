@@ -29,7 +29,7 @@ const uploadFileCrazy = async () => {
 
   console.log('Started crazy upload...')
   setTimeout(() => {
-    // crazyFileStream.emit('error', new Error('Oh no!'))
+    crazyFileStream.emit('error', new Error('Oh no!'))
     crazyFileStream.close()
   }, 150)
 
@@ -39,7 +39,7 @@ const uploadFileCrazy = async () => {
       uploadedFiles.push(oid)
     })
     .catch(error => {
-      console.error('Crazy upload failed', error)
+      console.error('Crazy upload failed:', error)
     })
 }
 
