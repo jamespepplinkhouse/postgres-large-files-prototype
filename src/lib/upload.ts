@@ -10,29 +10,24 @@ export default async (input: stream) => {
       return new Promise((resolve, reject) => {
         let outputFinished = false
 
-        input.on('error', () => {
-          // Errors get passed to output correctly, no need to handle here
-          console.log('##### input error')
+        input.on('error', error => {
+          console.error('input stream error:', error)
+          reject(error)
         })
-        input.on('close', () => {
-          console.log('input close')
 
-          // Input close does not close output correctly!
+        input.on('close', () => {
           if (!outputFinished) {
             reject('input closed before output finished')
           }
         })
 
-        input.on('finish', () => console.log('input finish'))
-
-        output.on('error', () => {
-          console.log('##### output error')
-          reject('output')
+        output.on('error', error => {
+          console.error('output stream error:', error)
+          reject(error)
         })
-        output.on('close', () => console.log('output close'))
+
         output.on('finish', () => {
           outputFinished = true
-          console.log('output finish')
           resolve(oid)
         })
       })

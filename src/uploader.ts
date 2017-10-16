@@ -29,7 +29,7 @@ const uploadFileCrazy = async () => {
 
   console.log('Started crazy upload...')
   setTimeout(() => {
-    crazyFileStream.emit('error', new Error('Oh no!'))
+    // crazyFileStream.emit('error', new Error('Oh no!'))
     crazyFileStream.close()
   }, 150)
 
@@ -43,16 +43,19 @@ const uploadFileCrazy = async () => {
     })
 }
 
+const uploadSaneChain = () => {
+  const saneChain = uploadFileSane()
+  for (let i = 0; i < 100; i++) {
+    saneChain.then(() => {
+      return uploadFileSane()
+    })
+  }
+  saneChain.catch(error => console.error('Sane chain failed:', error))
+}
+
 export default () => {
   // uploadFileSane()
-
-  // const saneChain = uploadFileSane()
-  // for (let i = 0; i < 100; i++) {
-  //   saneChain.then(() => {
-  //     return uploadFileSane()
-  //   })
-  // }
-  // saneChain.catch(error => console.error('Sane chain failed:', error))
+  // uploadSaneChain()
 
   setInterval(uploadFileCrazy, 1000)
 
