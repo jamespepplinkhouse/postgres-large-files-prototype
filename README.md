@@ -20,3 +20,8 @@ WHERE application_name != 'pgAdmin III - Query Tool';
 ```sql
 select pg_terminate_backend(18234);
 ```
+
+### Download a file
+```bash
+$ psql --host localhost -U postgres -d media -p 5444 -c "\lo_export 17531 '~/Desktop/download.test' "
+```
