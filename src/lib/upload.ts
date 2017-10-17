@@ -1,36 +1,43 @@
-import { db, createLargeObjectManager } from './db'
-import stream = require('stream')
+import { createReadStream } from 'fs'
+import { LargeObjectManager } from 'pg-large-object'
 
-export default async (input: stream) => {
+export const uploadStream = async (db, inputStream) => {
   return db.tx(async (tx: any) => {
-    const man = createLargeObjectManager(tx)
-    return man.createAndWritableStreamAsync().then(([oid, output]: any) => {
-      input.pipe(output)
+    const man = new LargeObjectManager({ pgPromise: tx })
 
-      return new Promise((resolve, reject) => {
-        let outputFinished = false
+    return man
+      .createAndWritableStreamAsync()
+      .then(([oid, outputStream]: any) => {
+        inputStream.pipe(outputStream)
 
-        input.on('error', error => {
-          console.error('input stream error:', error)
-          reject(error)
-        })
+        return new Promise((resolve, reject) => {
+          let outputFinished = false
 
-        input.on('close', () => {
-          if (!outputFinished) {
-            reject('input closed before output finished')
-          }
-        })
+          inputStream.on('error', error => {
+            console.error('input stream error:', error)
+            reject(error)
+          })
 
-        output.on('error', error => {
-          console.error('output stream error:', error)
-          reject(error)
-        })
+          inputStream.on('close', () => {
+            if (!outputFinished) {
+              reject('input closed before output finished')
+            }
+          })
 
-        output.on('finish', () => {
-          outputFinished = true
-          resolve(oid)
+          outputStream.on('error', error => {
+            console.error('output stream error:', error)
+            reject(error)
+          })
+
+          outputStream.on('finish', () => {
+            outputFinished = true
+            resolve(oid)
+          })
         })
       })
-    })
   })
+}
+
+export const uploadFile = async (db, path: string) => {
+  return await uploadStream(db, createReadStream(path))
 }

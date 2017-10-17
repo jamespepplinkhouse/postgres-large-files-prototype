@@ -1,5 +1,4 @@
 const pgp = require('pg-promise')()
-const { LargeObjectManager } = require('pg-large-object')
 
 export const db = pgp({
   host: 'localhost',
@@ -8,7 +7,3 @@ export const db = pgp({
   user: 'postgres',
   password: 'postgres'
 })
-
-export const createLargeObjectManager = (tx: any) => {
-  return new LargeObjectManager({ pgPromise: tx })
-}

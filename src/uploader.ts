@@ -1,22 +1,13 @@
-import * as fs from 'fs'
-import upload from './lib/upload'
+import { createReadStream } from 'fs'
+import { uploadStream, uploadFile } from './lib/upload'
+import { db } from './lib/db'
 
 const testFile = './data/5meg.test'
 const uploadedFiles: number[] = []
 
 const uploadFileSane = async () => {
-  // const defaults = {
-  //   flags: 'r',
-  //   encoding: null,
-  //   fd: null,
-  //   mode: 0o666,
-  //   autoClose: true
-  // }
-
-  const testFileStream = fs.createReadStream(testFile)
-
   try {
-    const oid = await upload(testFileStream)
+    const oid = await uploadFile(db, testFile)
     console.log('Sane upload:', oid)
     uploadedFiles.push(oid)
   } catch (error) {
@@ -25,7 +16,7 @@ const uploadFileSane = async () => {
 }
 
 const uploadFileCrazy = async () => {
-  const crazyFileStream = fs.createReadStream(testFile)
+  const crazyFileStream = createReadStream(testFile)
 
   console.log('Started crazy upload...')
   setTimeout(() => {
@@ -33,7 +24,7 @@ const uploadFileCrazy = async () => {
     crazyFileStream.close()
   }, 150)
 
-  upload(crazyFileStream)
+  uploadStream(db, crazyFileStream)
     .then(oid => {
       console.log('Crazy upload:', oid)
       uploadedFiles.push(oid)
