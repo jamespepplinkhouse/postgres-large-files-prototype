@@ -1,7 +1,6 @@
 // Example tests:
 // Download many files while uploading many files
-// Upload files with the wrong byte length
-// Upload files where we kill the stream randomly
+// Upload files where we kill the stream randomly or throw errors
 
 import uploader from './uploader'
 

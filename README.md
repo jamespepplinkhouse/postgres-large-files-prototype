@@ -2,7 +2,7 @@
 
 ## Why?
 
-This code will tests various scenarios of uploading and downloading files from Postgres Large File Storage. In production we have seen that poor network conditions can interrupt an upload or download leaving transactions open which eventually will queue and lock any further transactions.
+This code will test various scenarios of uploading and downloading files from Postgres Large File Storage. In production we have seen that poor network conditions can interrupt an upload or download leaving transactions open which eventually will queue and lock any further transactions.
 
 We want battle hardened Node.js code that will clean up transactions so that the server can survive these conditions!
 
