@@ -15,7 +15,8 @@
   "dependencies": {
     "pg-large-object": "2.0.0",
     "pg-promise": "7.0.2",
-    "ts-node": "3.3.0"
+    "ts-node": "3.3.0",
+    "uuid": "3.1.0"
   },
   "devDependencies": {
     "@types/node": "8.0.34",

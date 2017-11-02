@@ -25,3 +25,8 @@ select pg_terminate_backend(18234);
 ```bash
 $ psql --host localhost -U postgres -d media -p 5444 -c "\lo_export 17531 '~/Desktop/download.test' "
 ```
+
+### List large objects
+```bash
+$ psql --host localhost -U postgres -d media -p 5444 -c "\lo_list"
+```
