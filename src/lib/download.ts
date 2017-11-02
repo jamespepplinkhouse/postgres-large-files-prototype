@@ -39,7 +39,8 @@ export default class LargeFileStreamer {
 
   public getStream(
     id: number,
-    callback: (stream: NodeJS.ReadableStream, size: number) => any
+    callback: (stream: NodeJS.ReadableStream, size: number) => any,
+    offset: number = 0
   ): void {
     if (this.state !== 'open') {
       throw new Error('LargeFileStreamer is closed or not initialised')
