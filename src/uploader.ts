@@ -53,6 +53,6 @@ export default () => {
   // setInterval(uploadFileSane, 1000)
 
   setInterval(() => {
-    console.log(`Uploaded ${uploadedFiles.length} files...`)
+    console.log(`\n\nUploaded ${uploadedFiles.length} files...\n\n`)
   }, 5000)
 }

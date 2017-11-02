@@ -12,20 +12,14 @@ export const uploadStream = async (pgpDb, inputStream: ReadStream) => {
         inputStream.pipe(outputStream)
 
         return new Promise((resolve, reject) => {
-          let outputFinished = false
-
           inputStream.on('error', error => {
             console.error(`Input stream error for OID:${oid}`, error)
             reject(error)
           })
 
           inputStream.on('close', () => {
-            if (!outputFinished) {
-              console.info(
-                `Input stream closed before output finished for OID:${oid}`
-              )
-              outputStream.end()
-            }
+            console.info(`Closed input stream for OID:${oid}`)
+            outputStream.end()
           })
 
           outputStream.on('error', error => {
@@ -35,7 +29,6 @@ export const uploadStream = async (pgpDb, inputStream: ReadStream) => {
 
           outputStream.on('finish', () => {
             console.info(`Finished writable stream for OID:${oid}`)
-            outputFinished = true
             resolve(oid)
           })
         })
