@@ -25,10 +25,10 @@ const downloadFile = async () => {
   })
 
   // Kill the output stream
-  setTimeout(() => {
-    console.log('Closing output stream')
-    outputFile.close()
-  }, 50)
+  // setTimeout(() => {
+  //   console.log('Closing output stream')
+  //   outputFile.close()
+  // }, 50)
 }
 
 export default () => {
