@@ -1,4 +1,3 @@
-import { db } from './db'
 const { LargeObject, LargeObjectManager } = require('pg-large-object')
 
 export default async (
