@@ -11,7 +11,9 @@ const downloadFile = async () => {
   const outputFile = createWriteStream(outputFileName)
   console.info(`Output file name: ${outputFileName}`)
 
-  download(db, oid, (stream, size) => {
+  download(db, oid, (stream, size, done) => {
+    outputFile.on('close', done)
+
     stream.pipe(outputFile)
     stream.on('end', () => {
       console.info(`DB stream ended for: ${oid}`)
