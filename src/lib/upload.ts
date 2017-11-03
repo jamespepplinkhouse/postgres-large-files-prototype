@@ -3,32 +3,32 @@ import { LargeObjectManager } from 'pg-large-object'
 
 export const uploadStream = async (pgpDb, inputStream: ReadStream) => {
   return pgpDb.tx(async (tx: any) => {
-    const man = new LargeObjectManager({ pgPromise: tx })
+    const manager = new LargeObjectManager({ pgPromise: tx })
 
-    return man
+    return manager
       .createAndWritableStreamAsync()
       .then(([oid, outputStream]: [number, WriteStream]) => {
-        console.info(`Created writable stream for OID:${oid}`)
+        console.info(`Created writable stream for OID: ${oid}`)
         inputStream.pipe(outputStream)
 
         return new Promise((resolve, reject) => {
           inputStream.on('error', error => {
-            console.error(`Input stream error for OID:${oid}`, error)
+            console.error(`Input stream error for OID: ${oid}`, error)
             reject(error)
           })
 
           inputStream.on('close', () => {
-            console.info(`Closed input stream for OID:${oid}`)
+            console.info(`Closed input stream for OID: ${oid}`)
             outputStream.end()
           })
 
           outputStream.on('error', error => {
-            console.error(`Output stream error for OID:${oid}`, error)
+            console.error(`Output stream error for OID: ${oid}`, error)
             reject(error)
           })
 
           outputStream.on('finish', () => {
-            console.info(`Finished writable stream for OID:${oid}`)
+            console.info(`Finished writable stream for OID: ${oid}`)
             resolve(oid)
           })
         })
