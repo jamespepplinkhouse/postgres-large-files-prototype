@@ -17,6 +17,7 @@ export default async (pgpDb, oid: number, offset: number = 0): Promise<any> => {
           oid,
           LargeObjectManager.READ
         )
+
         largeObject.seek(offset, LargeObject.SEEK_SET, () => {
           // Do nothing
         })
