@@ -27,6 +27,7 @@ export default async (pgpDb, oid: number, offset: number = 0): Promise<any> => {
         return new Promise((res, rej) => {
           stream.on('error', rej)
           stream.on('close', res)
+          stream.on('end', res)
 
           resolveStream(stream, size)
         })
