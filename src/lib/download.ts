@@ -14,9 +14,11 @@ export default async (pgpDb, oid: number, offset: number = 0): Promise<any> => {
           LargeObjectManager.READ
         )
 
-        largeObject.seek(offset, LargeObject.SEEK_SET, () => {
-          // Do nothing
-        })
+        if (offset > 0) {
+          largeObject.seek(offset, LargeObject.SEEK_SET, () => {
+            // Do nothing
+          })
+        }
 
         const stream = largeObject.getReadableStream()
         const size = await largeObject.sizeAsync()
