@@ -6,10 +6,6 @@ const { LargeObject, LargeObjectManager } = require('pg-large-object')
 
 export default async (pgpDb, oid: number, offset: number = 0): Promise<any> => {
   return new Promise((resolve, reject) => {
-    const resolveStream = (stream, size) => {
-      resolve({ stream, size })
-    }
-
     pgpDb
       .tx(async (tx: any) => {
         const manager = new LargeObjectManager({ pgPromise: tx })
@@ -30,7 +26,7 @@ export default async (pgpDb, oid: number, offset: number = 0): Promise<any> => {
           stream.on('close', res)
           stream.on('end', res)
 
-          resolveStream(stream, size)
+          resolve({ stream, size })
         })
       })
       .catch(err => {
