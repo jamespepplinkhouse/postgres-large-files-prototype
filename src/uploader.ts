@@ -48,8 +48,8 @@ export default () => {
   // uploadFileSane()
   // uploadSaneChain()
 
-  // setInterval(uploadFileCrazy, 1000)
-  setInterval(uploadFileSane, 1000)
+  setInterval(uploadFileCrazy, 1000)
+  // setInterval(uploadFileSane, 1000)
 
   setInterval(() => {
     console.log(`\n\nUploaded ${uploadedFiles.length} files...\n\n`)
