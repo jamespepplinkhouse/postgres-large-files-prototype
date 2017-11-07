@@ -6,5 +6,5 @@
 import uploader from './uploader'
 import downloader from './downloader'
 
-uploader()
+// uploader()
 downloader()

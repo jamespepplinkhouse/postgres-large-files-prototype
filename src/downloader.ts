@@ -11,24 +11,17 @@ const downloadFile = async () => {
   const outputFile = createWriteStream(outputFileName)
   console.info(`Output file name: ${outputFileName}`)
 
-  download(db, oid, (stream, size, done) => {
-    outputFile.on('close', done)
+  const { stream, size } = await download(db, oid)
+  console.info(`Got stream with size ${size}`)
 
-    stream.pipe(outputFile)
-    stream.on('end', () => {
-      console.info(`DB stream ended for: ${oid}`)
-    })
-
-    stream.on('error', err => {
-      console.info(`DB stream error: ${oid} ${err}`)
-    })
-  })
+  stream.pipe(outputFile)
+  outputFile.on('close', () => stream.destroy())
 
   // Kill the output stream
-  // setTimeout(() => {
-  //   console.log('Closing output stream')
-  //   outputFile.close()
-  // }, 50)
+  setTimeout(() => {
+    console.log('Closing output stream')
+    outputFile.close()
+  }, 50)
 }
 
 export default () => {
