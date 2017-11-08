@@ -43,7 +43,7 @@ const downloadFile = async () => {
 }
 
 export default () => {
-  setInterval(() => {
+  const interval = setInterval(() => {
     Promise.all([
       downloadFile(),
       downloadFile(),
@@ -51,4 +51,11 @@ export default () => {
       downloadFile()
     ])
   }, 100)
+
+  setTimeout(() => {
+    clearInterval(interval)
+    console.log(
+      '\n\n\n################################################################################\n\n\n'
+    )
+  }, 20000)
 }
