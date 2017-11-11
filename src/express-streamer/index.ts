@@ -10,6 +10,7 @@ import * as config from './config'
 import startup from './startup'
 
 import streamRange from './middlewares/streamRange'
+import getMedia from './middlewares/getMedia'
 
 const app = express()
 const sendSeekable = require('send-seekable')
@@ -20,6 +21,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/static/index.html'))
 })
 
-app.use('/stream', streamRange)
+app.use('/range-streamer', streamRange)
+app.use('/media', getMedia)
 
 startup(app).catch(console.error)
