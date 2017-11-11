@@ -6,19 +6,32 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "up": "docker-compose up -d",
-    "down": "docker-compose down"
+    "down": "docker-compose down",
+    "express:setup": "ts-node src/express-streamer/setup.ts",
+    "express:start": "ts-node src/express-streamer/index.ts"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true
   },
   "dependencies": {
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
     "pg-large-object": "2.0.0",
     "pg-promise": "7.0.2",
+    "send-seekable": "^1.0.4",
     "ts-node": "3.3.0",
     "uuid": "3.1.0"
   },
   "devDependencies": {
+    "@types/compression": "^0.0.35",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/cors": "^2.8.3",
+    "@types/express": "^4.0.39",
+    "@types/helmet": "^0.0.37",
     "@types/node": "8.0.34",
     "prettier": "1.7.4",
     "tslint": "5.7.0",
