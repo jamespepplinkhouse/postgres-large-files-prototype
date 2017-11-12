@@ -45,4 +45,4 @@ $ psql --host localhost -U postgres -d media -p 5444 -c "\lo_list"
 - Restart the pg media container : `npm run down && npm run up`
 - Upload the test video in the media db : `npm run express:setup`
 - `npm run express:start`
-- Connect to `http://localhost:8080`
+- Visit `http://localhost:8080`
