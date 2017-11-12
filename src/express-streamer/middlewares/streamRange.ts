@@ -57,7 +57,7 @@ export default async function(
       })
     })
 
-    // In real life, the size would be stored and accessible in a media metadata database
+    // In real life, the size would be stored and accessible in a metadata database
     const range = getRequestRanges(req, res, 31551484)
 
     if (range.error) {

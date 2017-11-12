@@ -8,5 +8,7 @@ export default async function(
   res: Express.Response,
   next: Express.NextFunction
 ): Promise<void> {
-  console.log('Get Media oid: 16385')
+  console.log('Get Full Media oid: 16385')
+  const { stream, size } = await download(mediaDb, 16385)
+  stream.pipe(res)
 }
