@@ -33,11 +33,16 @@ $ psql --host localhost -U postgres -d media -p 5444 -c "\lo_list"
 
 ## Express Streamer
 
+- Serves a single index.html on localhost:8080
+- That index file includes 2 html5 video elements
+- One is hitting an endpoint able to stream a media with range header
+- The other one is hitting an endpoint that serves complete files 
+
 ### Get Started
 
-- Get a sample video from: http://www.sample-videos.com/
+- Get a sample video from: http://www.sample-videos.com/ : http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4
 - Create `testVideo.mp4` in `/data`
 - Restart the pg media container : `npm run down && npm run up`
 - Upload the test video in the media db : `npm run express:setup`
 - `npm run express:start`
-- Connect to http://localhost:8080`
+- Connect to `http://localhost:8080`
