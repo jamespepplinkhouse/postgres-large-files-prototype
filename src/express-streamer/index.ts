@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/static/index.html'))
 })
 
-app.use('/range-streamer', streamRange)
+app.use('/range-streamer', sendSeekable, streamRange)
 app.use('/media', getMedia)
 
 startup(app).catch(console.error)
